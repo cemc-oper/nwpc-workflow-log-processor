@@ -1,0 +1,17 @@
+# chart data type
+#   currently only timeline is supported
+type: timeline
+
+# data series
+# each item is a repo with following props.
+#   owner: owner name
+#   repo: repo name
+series:
+  - owner: nwp_xp
+    repo: nwpc_op
+  - owner: nwp_xp
+    repo: nwpc_qu
+  - owner: nwp_xp
+    repo: eps_nwpc_qu
+  - owner: nwp_xp
+    repo: nwpc_pd
