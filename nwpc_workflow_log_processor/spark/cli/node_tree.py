@@ -1,4 +1,3 @@
-# coding=utf-8
 import datetime
 import json
 
@@ -54,28 +53,31 @@ def database(owner, repo, repo_type, begin_date, end_date, config_file, output_t
 
 @cli.command('file')
 @click.option("-c", "--config", "config_file", help="config file path", required=True)
+@click.argument('task_file', required=True)
 def cli_file(
-        config_file
+        config_file: str,
+        task_file: str,
 ):
     """Generate node tree from log file.
     """
 
     config = load_config(config_file)
+    task = load_config(task_file)
 
-    task_config = config["task"]
+    task_config = task["task"]
     owner = task_config.get("owner", None)
     repo = task_config.get("repo", None)
     begin_date = task_config.get("begin_date", None)
     end_date = task_config.get("end_date", None)
     repo_type = task_config.get("workflow_type", "ecflow")
 
-    source_config = config["source"]
+    source_config = task["source"]
 
     current_source_config = source_config[0]
 
     log_file = current_source_config["file_path"]
 
-    sink_config = config["sink"]
+    sink_config = task["sink"]
 
     current_sink_config = sink_config[0]
     output_type = current_sink_config["type"]
