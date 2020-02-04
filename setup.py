@@ -44,8 +44,8 @@ setup(
         "pyspark",
         "click",
         "pymongo",
-        "nwpc_workflow_model",
-        "nwpc_workflow_log_model",
+        "nwpc_workflow_model=0.5",
+        "nwpc_workflow_log_model>=2,<3",
     ],
 
     extras_require={
