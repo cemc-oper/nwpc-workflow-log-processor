@@ -4,7 +4,7 @@ import json
 import click
 from loguru import logger
 
-from nwpc_workflow_log_processor.spark.engine.session import create_mysql_session, create_local_file_session
+from nwpc_workflow_log_processor.spark.engine.session import create_spark_session
 from nwpc_workflow_log_processor.spark.calculator.node_tree_calculator import calculate_node_tree
 from nwpc_workflow_log_processor.spark.data_source.rmdb import load_records_from_rmdb
 from nwpc_workflow_log_processor.spark.data_source.file import load_records_from_file
@@ -62,6 +62,7 @@ def cli_file(
     """
 
     config = load_config(config_file)
+
     task = load_config(task_file)
 
     task_config = task["task"]
@@ -132,7 +133,7 @@ def generate_node_tree_from_database(
 ) -> dict:
     run_start_time = datetime.datetime.now()
 
-    spark = create_mysql_session(config)
+    spark = create_spark_session(config)
 
     record_rdd = load_records_from_rmdb(
         config,
@@ -169,7 +170,7 @@ def generate_node_tree_from_file(
 ) -> dict:
     run_start_time = datetime.datetime.now()
 
-    spark = create_local_file_session(config)
+    spark = create_spark_session(config)
 
     record_rdd = load_records_from_file(
         config,

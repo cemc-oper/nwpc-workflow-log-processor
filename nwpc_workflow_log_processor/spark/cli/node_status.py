@@ -1,4 +1,3 @@
-# coding=utf-8
 """
 Get record list for each node in date range.
 """
@@ -12,7 +11,7 @@ from nwpc_workflow_log_processor.spark.data_source.file import load_records_from
 from nwpc_workflow_log_processor.spark.data_source.rmdb import load_records_from_rmdb
 # from nwpc_workflow_log_processor.spark.data_store.kafka import save_to_kafka
 from nwpc_workflow_log_processor.spark.data_store.mongodb import save_to_mongodb
-from nwpc_workflow_log_processor.spark.engine.session import create_mysql_session, create_local_file_session
+from nwpc_workflow_log_processor.spark.engine.session import create_spark_session
 
 
 @click.group()
@@ -104,7 +103,7 @@ def generate_node_status(
     repo_type: ["ecflow", "sms"], optional
         workflow type, ecflow or sms, currently we are focusing on ecFlow.
     """
-    spark = create_local_file_session(config)
+    spark = create_spark_session(config)
 
     record_rdd = load_records_from_file(
         config,
@@ -135,7 +134,7 @@ def generate_node_status_from_database(
         end_date: datetime.datetime = None,
         repo_type: str = "ecflow"
 ):
-    spark = create_mysql_session(config)
+    spark = create_spark_session(config)
 
     record_rdd = load_records_from_rmdb(
         config,
