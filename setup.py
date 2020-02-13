@@ -11,7 +11,7 @@ with codecs.open(path.join(here, "README.md"), encoding="utf-8") as f:
 setup(
     name="nwpc-workflow-log-processor",
 
-    version="2.0.0",
+    version="2.2.0",
 
     description="A log processor for workflow systems in NWPC.",
     long_description=long_description,
